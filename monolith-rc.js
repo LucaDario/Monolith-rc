@@ -18,7 +18,7 @@ RocketChat.callbacks.add('renderMessage', (message) => {
         message.msg = message.msg.replace(results[0], '');
     }
 
-    if(bubbleType !== null){
+    if(bubbleType !== null && typeof document !== 'undefined'){
         const wrapper_id = 'wrapper_' + message._id;
         const cached_element = document.getElementById(wrapper_id);
         if(cached_element !== null){
@@ -30,7 +30,7 @@ RocketChat.callbacks.add('renderMessage', (message) => {
         renderizeBubble(message, wrapper_id, bubbleType);
     }
     return message;
-}, RocketChat.callbacks.priority.LOW, 'monolith');
+}, RocketChat.callbacks.priority.HIGH, 'monolith');
 
 function renderizeBubble(message, wrapper_id, bubbleName) {
     const intervalId = setInterval(() => {
